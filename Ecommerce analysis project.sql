@@ -139,7 +139,8 @@ SELECT  FORMAT_DATE ("%Y%m", PARSE_DATE ("%Y%m%d",date)) AS month,
         COUNT(CASE WHEN eCommerceAction.action_type = '3' THEN eCommerceAction.action_type END) AS num_addtocart,
         COUNT(CASE WHEN eCommerceAction.action_type = '6' AND productRevenue IS NOT NULL THEN eCommerceAction.action_type END) AS num_purchase,
         ROUND((COUNT(CASE WHEN eCommerceAction.action_type = '3' THEN eCommerceAction.action_type END)/COUNT(CASE WHEN eCommerceAction.action_type = '2' THEN eCommerceAction.action_type END))*100,2) AS add_to_cart_rate,
-        ROUND((COUNT(CASE WHEN eCommerceAction.action_type = '6' AND productRevenue IS NOT NULL THEN eCommerceAction.action_type END)/COUNT(CASE WHEN eCommerceAction.action_type = '2' THEN eCommerceAction.action_type END))*100,2) AS purchase_rate
+        ROUND((COUNT(CASE WHEN eCommerceAction.action_type = '6' AND productRevenue IS NOT NULL THEN eCommerceAction.action_type END)/COUNT(CASE WHEN eCommerceAction.action_type = '2' THEN eCommerceAction.action_type END))*100,2) 
+                AS purchase_rate
 FROM `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`,
 UNNEST (hits) hits,
 UNNEST (hits.product) product
